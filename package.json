@@ -1,0 +1,17 @@
+{
+  "name": "mini-post",
+  "version": "1.0.0",
+  "description": "mini-post application implementing examplary post service",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.2",
+    "nodemon": "^3.1.7"
+  }
+}
