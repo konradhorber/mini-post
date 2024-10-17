@@ -1,8 +1,36 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', (req,res) =>{
-    res.send('You are in posts!')
+const Post = require('../models/Post')
+
+// POST (Create data)
+router.post('/', async(req,res) =>{
+
+    const postData = new Post({
+        user:req.body.user,
+        title:req.body.title,
+        text:req.body.text,
+        hashtag:req.body.hashtag,
+        location:req.body.location,
+        url:req.body.url,
+    })
+
+    try{
+        const postToSave = await postData.save()
+        res.send(postToSave)
+    }catch(err){
+        res.send({message:err})
+    }
+
+})
+
+router.get('/', async(req,res) => {
+    try{
+        const getPosts = await Post.find()
+        res.send(getPosts)
+    }catch(err){
+        res.send({message:err})
+    }
 })
 
 module.exports = router
