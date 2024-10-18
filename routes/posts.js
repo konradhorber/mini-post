@@ -65,5 +65,17 @@ router.patch('/:postId', async(req,res) =>{
     }
 })
 
+// DELETE (Delete)
+router.delete('/:postId', async(req,res)=>{
+    try{
+        const deletePostById = await Post.deleteOne(
+            {_id:req.params.postId}
+        )
+        res.send(deletePostById)
+    }catch(err){
+        res.send({message:err})
+    }    
+})
+
 
 module.exports = router
