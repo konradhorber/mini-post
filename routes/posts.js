@@ -24,6 +24,7 @@ router.post('/', async(req,res) =>{
 
 })
 
+// GET 1 (Read)
 router.get('/', async(req,res) => {
     try{
         const getPosts = await Post.find()
@@ -32,5 +33,37 @@ router.get('/', async(req,res) => {
         res.send({message:err})
     }
 })
+
+// GET 2 (Read)
+router.get('/:postId', async(req,res) => {
+    try{
+        const getPosts = await Post.findById(req.params.postId)
+        res.send(getPosts)
+    }catch(err){
+        res.send({message:err})
+    }
+})
+
+// PATCH (Update)
+router.patch('/:postId', async(req,res) =>{
+     try{
+        const updatePostById = await Post.updateOne(
+            {_id:req.params.postId},
+            {$set:{
+                user:req.body.user,
+                title:req.body.title,
+                text:req.body.text,
+                hashtag:req.body.hashtag,
+                location:req.body.location,
+                url:req.body.url,
+                }
+            }
+        )
+        res.send(updatePostById)
+    }catch(err){
+        res.send({message:err})
+    }
+})
+
 
 module.exports = router
